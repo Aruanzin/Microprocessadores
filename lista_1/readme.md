@@ -3,18 +3,9 @@
 ## Exercício 1
 
 **Definição Formal de Sistema Embarcado:**
-Um sistema embarcado é definido pela IEEE 610.12-1990 como “um sistema computacional que faz parte de um sistema maior e implementa alguns dos requerimentos deste sistema”.
+Um sistema embarcado é definido pela IEEE 610.12-1990 como “um sistema computacional que faz parte de um sistema maior e implementa alguns dos requerimentos deste sistema”. Um sistema embarcado realiza um conjunto de tarefas únicas e anteriormente definidas, o que permite uma redução do custo, e recursos computacionais. Logo, não é necessário equipamentos extras para funcionar como teclado, interface gráfica ou até um SO. Um das caracteristicas de sistemas embarcados sem SO é a criação de Firmware, software desenvolvido para ações específicas
 
-**Principais Características:**
-- **Tarefas Específicas:** Realiza um conjunto de tarefas específicas e predefinidas.
-- **Otimização:** Projetado para reduzir tamanho, recursos computacionais e custo.
-- **Firmware:** Software armazenado em memória FLASH-ROM, não em disco rígido.
-- **Recursos Limitados:** Pode operar sem teclado, tela ou interfaces gráficas.
-
-**Diferenças de um Computador de Propósito Geral:**
-- **Funcionalidade Fixa:** Não pode ter sua funcionalidade alterada durante o uso.
-- **Eficiência Energética:** Projetado para consumo reduzido de energia.
-- **Arquitetura:** Utiliza arquiteturas como ARM, PIC, AVR, ao invés de x86.
+Diferentemente de um computador de propósito generalizado, os sistemas embarcados apresentam funcionalidade fixa, isto é, durante o uso, sua funcionalidade não pode ser alterada.Além de utiliza arquiteturas diferentes de x86 como ARM, PIC e AVR.
 
 ## Exercício 2
 
