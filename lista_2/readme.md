@@ -7,6 +7,9 @@
 # Lista 2 MicroProcessadores
 
 ## Exercício 3
+
+Um microcontrolador é útil para controles de elevadores porque é preciso, integra funções, automatiza e é fácil de programar. Para cálculos de desempenho e controle de movimento mais precisos, a CPU deve ter capacidade média, barramento de 16 ou 32 bits e operações de ponto flutuante. Isso permite respostas rápidas, otimização e segurança sem exigir muito poder de processamento, mas mantendo a eficiência e a confiabilidade do sistema.
+
 ## Exercício 4
 
 Quanto às portas paralelas de um microcontrolador:
@@ -30,6 +33,15 @@ Assinale V para verdadeiro e F para falso nas afirmações abaixo:
 (**F**) A técnica de pipeline é impossível de ser utilizada em computadores de arquitetura Von Neumann.
 
 ## Exercício 6
+Indique quais afirmativas se aplicam a uma instrução CISC e quais a uma instrução RISC:
+➔ **Os programas são mais complexos** RISC
+➔ **A maioria das instruções tem a mesma duração** RISC
+➔ **Mais instruções disponíveis**: CISC 
+➔ **Programas menores**: CISC
+➔ **Utiliza menos espaço na memória de programa** CISC
+➔ **Processamento de cada instrução é mais lento** 
+➔ **Microcontroladores PIC, AVR, ARM**: RISC
+➔ **Tempo de execução das instruções depende da frequência do clock.** CISC
 ## Exercício 7
 
 Arquitetura: Von Neumann, pois segundo a imagem podemos identidificar que dados e instruções compartilham o mesmo barramento
