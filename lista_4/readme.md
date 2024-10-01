@@ -55,34 +55,30 @@ Essa operação resulta em 0xFF mesmo, pois não há nenhum número menor que ze
 ## Atividade 2
 
 ```
-    ; Origem do programa em 00h
-        ORG 00h
+ORG 00h          ; Origem no endereço 00h
+SJMP MAIN        ; Ir para a main
 
-    ; Salta para o ponto principal
-        SJMP MAIN
+ORG 33h          ; Origem no endereço 33h
 
-    ; Origem do programa principal em 33h
-        ORG 33h
+MAIN:
+    MOV R0, #20h ; Inicializar R0 com valor #20h (ponteiro para a primeira posição de memória)
+    MOV R1, #0   ; Inicializar R1 com #0 (contador de valores menores que #45h)
 
-    MAIN:
-        MOV R0, #20h      ; Inicializa R0 com o endereço inicial (20h)
-        MOV R1, #0        ; Inicializa R1 com 0 (contador de valores menores que 45h)
+LACO:
+    MOV A, @R0   ; Armazenamento indireto de R0 para A
+    SUBB A, #45h ; Subtrai #45h de A
+    JNC FIMLACO     ; Ir para FIMLACO se tiver PSW=0
+    INC R1       ; Adiciona 1 unidade em R1 
 
-    LOOP:
-        MOV A, @R0        ; Move o conteúdo da memória apontada por R0 para A
-        SUBB A, #45h      ; Subtrai 45h de A (usa SUBB para considerar o carry)
-        JC  INCREMENT      ; Salta para INCREMENT se o carry for 1 (A < 45h)
+FIMLACO:
+    INC R0       ; Adiciona 1 unidade em R0
+    CJNE R0, #24h, LACO ; Comparar R0 com #24h e saltar para LOOP se não forem iguais
 
-    ; Se A >= 45h, não faz nada e vai para INCREMENT
-        SJMP NEXT
+    SJMP $       ; Nenhuma operação, segurar o programa nesta linha
 
-    INCREMENT:
-        INC R1            ; Incrementa R1 (contador de valores menores que 45h)
+END              ; Fim do programa
+```
 
-    NEXT:
-        INC R0            ; Incrementa R0 para apontar para a próxima posição de memória
-        CJNE R0, #24h, LOOP ; Compara R0 com 24h e salta para LOOP se não forem iguais
 
-    ; Fim do programa, segura na próxima linha
-        NOP                ; Nenhuma operação (mantém o programa parado)
-        SJMP $             ; Salta para a própria linha, criando um loop infinito
+
+O programa compara todas as posições de memória de 20h a 23h, contando quantos valores são menores a 45h. A informação é registrada no registrador R1. Depois de verificar todas as posições de memória, o programa entra em um loop sem fim, possibilitando a leitura ou verificação do valor em R1. Este comportamento é benéfico para aplicações que necessitam contar os valores que cumprem uma condição específica dentro de um intervalo de memória específico.
