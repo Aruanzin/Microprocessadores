@@ -37,12 +37,24 @@ Sim existe diferença, enquanto o espaço de pilha representa a localização de
 ### Supondo que um banco de 8 LEDs foi conectado à Porta P1 e um banco de 8 Switches conectado à P2 (EdSim51). Acender o LED 0 (pode ser qualquer outro) ao acionar o Switch 7 (pode ser qualquer outro). Apagar o LED ao desligar o Switch.
 
 ```
-    JNB     P2.7,   LIGAR_LED   ;Pula para LIGAR_LED caso não bit 7 (LED desligado) da Porta P2
-    CLR     P1.0    ; Limpa bit 0 da porta P1 (desliga LED 0)
-    SJMP    FIM     ; Pula para FIM incondicionalmente
-    LIGAR_LED:
-    SETB    P1.0    ; Liga LED 0 da porta P1
-    FIM:
+    Leitura:	
+
+	JNB     P2.7,   LIGAR_LED ; Verifica se o bit 7 da porta 2 foi clicado, ou seja se há o numero 0 está em P2.7, pulando para LIGAR_LED
+	LCALL Leitura ; loop
+
+Monitora:
+
+	JB			P2.7,	DESLIGAR_LED ;Verifica se o bit 7 da porta 2 foi clicado, ou seja retornando o numero 1 para P2.7, pulando para DESLIGAR_LED
+	LCALL Monitora ;LOOP
+
+DESLIGAR_LED:
+	SETB     P1.0   ;coloca numero 1 no bit 0 da porta 1, desligando o LED 
+	SJMP    FIM	;Pula para FIM
+ 
+LIGAR_LED:
+	CLR    P1.0		; limpa bit 0 da porta 1, ligando o LED 
+	SJMP Monitora	;Pula para Moitora
+FIM:
 ```
 
 ## Questão 13
