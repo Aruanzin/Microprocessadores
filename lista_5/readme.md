@@ -113,14 +113,22 @@ CHAVE7:
 ### Criar uma subrotina de delay de 50 milissegundos a partir da contagem de ciclos de instruções e intervalo de tempo. Essa estrutura poderá servir para piscar um LED a cada 50 ms (ver exemplo na aula correspondente).
 
 ```
-DELAY_50MS:
-    MOV R2, #250   ; R2 = 250 (número de loops internos)
-DELAY_LOOP:
-    MOV R3, #200   ; R3 = 200 (número de ciclos no loop interno)
-INNER_LOOP:
-    DJNZ R3, INNER_LOOP   ; Decrementa R3 até zero, 200 ciclos
-    DJNZ R2, DELAY_LOOP   ; Decrementa R2, 250 loops
-    RET
+	CLR P1.0 ; acende o LED em P1.0
+	
+Origem:
+	MOV R1, #5 ; atribui valor 5 a R1
+
+Loop:
+	NOP ;sem operação, consome tempo
+	DJNZ R1, Loop ;sem não for zero decrementa e retorna para loop
+	SETB P1.0 ;apaga LED P1.0
+	MOV R1, #5 ; atribui 5 a R1 denovo
+
+Loop2:
+	NOP ;sem operação, consome tempo
+	DJNZ R1, Loop2 ;sem não for zero decrementa e retorna para loop2 
+	CLR P1.0 ;acende o LED P1.0
+	SJMP Origem  ;Recomeça de origem
 ```
 
 ## Questão 15
