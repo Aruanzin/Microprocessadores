@@ -110,6 +110,8 @@ Eles foram utilizados no código a fim de que pudesse mapear cada número a seus
 
     Foi usado 3 registradores da seguinte forma, o registrador `R3` variando entre 2 e 8. Assim, usando `R1 = 250` e `R5 = 250`. Assim $C = 250 * 250 * R3$ sendo $C = 125.000 ciclos$ ou $C = 500.ciclos$. O que permite que a variança de tempo seja $\Delta t = 125.000 * 2 \mu s = 0,25s$ ou $\Delta t = 500.000 * 2 \mu s = 1s$
 
+    Foi usado essa abordagem uma vez que, no microcontrolador 8051, um registrador consegue guardar apenas até 256 valores diferentes, ou seja, 8 bits (1 byte) de dados.
+
 6. **Checagem e Troca**:
    ```assembly
    checa_ou_troca:
@@ -128,7 +130,7 @@ Eles foram utilizados no código a fim de que pudesse mapear cada número a seus
         MOV R4, #1          ; Define R4 como 1 para indicar que um botão foi pressionado
         JMP main            ; Retorna ao início do loop principal
     ```  
-   A sub-rotina `checa_ou_troca` verifica o valor de `R3`. Se for igual a 2, troca 8 e vice-versa. Além disso, também reseta o registrador `R4`,  a qual é usado para saber quando um botão foi clicado. Deixando uma flag para verificar se foi alterado conforme necessário
+   A sub-rotina `checa_ou_troca` verifica o valor de `R3`. Se for igual a 2, troca 8 e vice-versa. Além disso, também reseta o registrador `R4`,  a qual é usado para saber quando um botão foi clicado. Deixando uma flag para verificar se foi alterado conforme necessário 
 
 ## Diagrama Esquemático
 
