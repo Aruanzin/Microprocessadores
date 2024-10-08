@@ -27,7 +27,7 @@ Eles foram utilizados no código a fim de que pudesse mapear cada número a seus
 ## Explicação Estrutural
 
 1. **Inicialização dos Registradores**:  
-   ```
+   ```assembly
     ; Inicialização dos registradores
     MOV R2, #00  ; Inicializa R2 com 0 (contador)
     MOV R3, #2   ; Inicializa R3 com 2 (registrador usado para   guardar o valor atual do delay)
@@ -54,7 +54,7 @@ Eles foram utilizados no código a fim de que pudesse mapear cada número a seus
 
 
 3. **Loop Principal (`main`)**:  
-    ```
+    ```assembly
     main:
         MOV DPTR, #display  ; Carrega o endereço base da tabela de display em DPTR
         MOV A, R2           ; Move o valor de R2 para o acumulador (A)
@@ -75,7 +75,7 @@ Eles foram utilizados no código a fim de que pudesse mapear cada número a seus
     A rotina main permite que usando a tabela de 7 segmentos, seja carregada a partir do valor no contador `R2`, o valor hexadecimal correspondente. Após isso, é verificado se o `SW0` ou `SW1` está sendo pressionado. Se estiver é setado um bit para o contador `R4`. Senão, verifica-se se é possivel chamar a sub-rotina `checa_ou_troca` a qual verifica o antigo valor entre 1s ou 0,25s e troca para o seu alternativo. Além disso, é responsável também por usar as sub-rotinas `aum_contador` e `delay`.
 
 4. **Incremento do Contador**:  
-    ```
+    ```assembly
     aum_contador:
         INC R2              ; Incrementa o valor de R2 (contador)
         CJNE R2, #0Ah, fim_reset  ; Compara R2 com 10; se não for igual, pula para "fim_reset"
@@ -92,7 +92,7 @@ Eles foram utilizados no código a fim de que pudesse mapear cada número a seus
    A sub-rotina `aum_contador` incrementa `R2` até quando o valor atinge o valor 10. Nesse momento a sub-rotina `reset_se_nove` é chamada para resetar `R2` a 0. 
 
 5. **Delay**:  
-   ```
+   ```assembly
     delay:
         MOV A, R3           ; Move o valor de R3 para o acumulador (A)
         MOV R0, A           ; Move o valor de A para R0 (contador de delay)
@@ -111,7 +111,7 @@ Eles foram utilizados no código a fim de que pudesse mapear cada número a seus
     Foi usado 3 registradores da seguinte forma, o registrador `R3` variando entre 2 e 8. Assim, usando `R1 = 250` e `R5 = 250`. Assim $C = 250 * 250 * R3$ sendo $C = 125.000 ciclos$ ou $C = 500.ciclos$. O que permite que a variança de tempo seja $\Delta t = 125.000 * 2 \mu s = 0,25s$ ou $\Delta t = 500.000 * 2 \mu s = 1s$
 
 6. **Checagem e Troca**:
-   ```
+   ```assembly
    checa_ou_troca:
         MOV A, R3           ; Move o valor de R3 para o acumulador (A)
         CJNE A, #2, diferente  ; Compara A com 2; se não for igual, pula para "diferente"
