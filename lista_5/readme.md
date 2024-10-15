@@ -37,12 +37,24 @@ Sim existe diferença, enquanto o espaço de pilha representa a localização de
 ### Supondo que um banco de 8 LEDs foi conectado à Porta P1 e um banco de 8 Switches conectado à P2 (EdSim51). Acender o LED 0 (pode ser qualquer outro) ao acionar o Switch 7 (pode ser qualquer outro). Apagar o LED ao desligar o Switch.
 
 ```
-    JNB     P2.7,   LIGAR_LED   ;Pula para LIGAR_LED caso não bit 7 (LED desligado) da Porta P2
-    CLR     P1.0    ; Limpa bit 0 da porta P1 (desliga LED 0)
-    SJMP    FIM     ; Pula para FIM incondicionalmente
-    LIGAR_LED:
-    SETB    P1.0    ; Liga LED 0 da porta P1
-    FIM:
+    Leitura:	
+
+	JNB     P2.7,   LIGAR_LED ; Verifica se o bit 7 da porta 2 foi clicado, ou seja se há o numero 0 está em P2.7, pulando para LIGAR_LED
+	LCALL Leitura ; loop
+
+Monitora:
+
+	JB			P2.7,	DESLIGAR_LED ;Verifica se o bit 7 da porta 2 foi clicado, ou seja retornando o numero 1 para P2.7, pulando para DESLIGAR_LED
+	LCALL Monitora ;LOOP
+
+DESLIGAR_LED:
+	SETB     P1.0   ;coloca numero 1 no bit 0 da porta 1, desligando o LED 
+	SJMP    FIM	;Pula para FIM
+ 
+LIGAR_LED:
+	CLR    P1.0		; limpa bit 0 da porta 1, ligando o LED 
+	SJMP Monitora	;Pula para Moitora
+FIM:
 ```
 
 ## Questão 13
@@ -101,14 +113,22 @@ CHAVE7:
 ### Criar uma subrotina de delay de 50 milissegundos a partir da contagem de ciclos de instruções e intervalo de tempo. Essa estrutura poderá servir para piscar um LED a cada 50 ms (ver exemplo na aula correspondente).
 
 ```
-DELAY_50MS:
-    MOV R2, #250   ; R2 = 250 (número de loops internos)
-DELAY_LOOP:
-    MOV R3, #200   ; R3 = 200 (número de ciclos no loop interno)
-INNER_LOOP:
-    DJNZ R3, INNER_LOOP   ; Decrementa R3 até zero, 200 ciclos
-    DJNZ R2, DELAY_LOOP   ; Decrementa R2, 250 loops
-    RET
+	CLR P1.0 ; acende o LED em P1.0
+	
+Origem:
+	MOV R1, #5 ; atribui valor 5 a R1
+
+Loop:
+	NOP ;sem operação, consome tempo
+	DJNZ R1, Loop ;sem não for zero decrementa e retorna para loop
+	SETB P1.0 ;apaga LED P1.0
+	MOV R1, #5 ; atribui 5 a R1 denovo
+
+Loop2:
+	NOP ;sem operação, consome tempo
+	DJNZ R1, Loop2 ;sem não for zero decrementa e retorna para loop2 
+	CLR P1.0 ;acende o LED P1.0
+	SJMP Origem  ;Recomeça de origem
 ```
 
 ## Questão 15
