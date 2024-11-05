@@ -1,4 +1,4 @@
-# Atividade Semanal 6 - Aplicação de Microprocessadores
+# Atividade Semanal 7 - Aplicação de Microprocessadores
 
 | Autor                          | NUSP      |
 | ------------------------------ | --------- |
