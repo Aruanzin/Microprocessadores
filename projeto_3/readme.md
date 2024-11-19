@@ -34,7 +34,7 @@ O programa foi desenvolvido em linguagem C usando o compilador MikroC PRO for PI
 
    * A função Lcd_Out() foi usada para exibir o valor no display LCD.
   
-![](./imageTermometro.png)
+![](./termometro.png)
 
 
 ## Projeto de um Voltímetro Digital com Microcontrolador PIC
@@ -61,7 +61,7 @@ $R1=3R2$
 Escolhemos valores comerciais para R1 e R2, por exemplo, $R1 = 3kΩ$ e $R2 = 1kΩ$, na qual o resistor R1 foi possível colocando 3 resistore de $1kΩ$ em série.
 
 
-![](./image.png)
+![](./voltimetro.png)
 
 | Autor                          | NUSP      |
 | ------------------------------ | --------- |
