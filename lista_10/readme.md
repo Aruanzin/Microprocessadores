@@ -10,6 +10,8 @@
 
 ## Simulações:
 
+1. **LED_Blink**
+
 ```c++
 #include <Arduino.h>
 
@@ -35,7 +37,59 @@ delay(500); // delay de 200 ms (Tempo que o LED fica desligado)
 
 ![](LED_Blink.png)
 
+Aqui vemos a luz alternar de seu modo atual a cada 500ms, ou seja, de acesa para apagado e vice-versa
 
+
+2. **Timer_Interrupt**
+
+```c++
+#include <Arduino.h>  // Inclui a biblioteca Arduino para usar suas APIs no simulador Wokwi
+
+const int ledPin = 2;         // Define o pino do LED como GPIO2
+const int buttonPin = 13;      // Define o pino do botão como GPIO4
+
+hw_timer_t *timer = NULL;  
+
+volatile bool startBlink = false;  
+void IRAM_ATTR onButtonPress() {  // Função de interrupção externa de GPIO para lidar com o pressionamento do botão
+  startBlink = true;  // Define a flag como verdadeira quando o botão é pressionado
+}
+
+void IRAM_ATTR onTimer() {  // Função de interrupção para lidar com o temporizador
+  digitalWrite(ledPin, !digitalRead(ledPin));  // Inverte o estado do LED
+}
+
+
+void setup() {
+  Serial.begin(115200);  // Inicializa a comunicação serial com uma taxa de transmissão de 115200 bauds
+  pinMode(ledPin, OUTPUT);  // Configura o pino do LED como saída
+  pinMode(buttonPin, INPUT_PULLUP);  // Configura o pino do botão como entrada com pull-up interno
+
+
+// Configuração da interrupção externa GPIO (botão)
+  attachInterrupt(digitalPinToInterrupt(buttonPin), onButtonPress, FALLING);  
+  timer = timerBegin(0, 80, true);  
+
+  timerAttachInterrupt(timer, &onTimer, true);  
+
+  timerAlarmWrite(timer, 500000, true);  
+  // Define o valor de comparação do temporizador para 500.000 microssegundos (500 ms)
+}
+
+void loop() {
+  if (startBlink) {  
+
+    timerAlarmEnable(timer);  // Ativa o temporizador para piscar o LED
+  } else {
+    timerAlarmDisable(timer);  // Desativa o temporizador caso contrário
+    digitalWrite(ledPin, LOW);  // e deixa o LED desligado 
+  }
+}
+```
+
+![](timerinterrupt.png)
+
+Aqui temos um projeto que controla o "piscar" da luz através de um botão.
 
 
 
