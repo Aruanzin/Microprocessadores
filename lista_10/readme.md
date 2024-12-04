@@ -1,4 +1,4 @@
-# Atividade Semanal 9 - Aplicação de Microprocessadores
+# Atividade Semanal 10 - Aplicação de Microprocessadores
 
 | Autor                          | NUSP      |
 | ------------------------------ | --------- |
