@@ -223,11 +223,8 @@ void displayAngle(int angle, String mode) {
 2. Carregue o código na ESP32 caso não for trabalhar no simulador.
 3. Utilize os botões para alternar entre os modos e o potenciômetro para controle manual.
 
----
 
-Aqui está a documentação para a **Parte 2** do projeto no formato **README.md**, destacando o uso do **ESP-IDF** no **Visual Studio Code**.
 
----
 
 ## **Projeto 4 - Programa 2: Controle PWM de LED RGB com ESP32 (ESP-IDF)**
 
